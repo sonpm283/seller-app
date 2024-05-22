@@ -1,32 +1,43 @@
-import { Box, Button } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import { useEffect, useMemo } from 'react'
 import ProductTable from '~/components/ProductTable'
 import { useAppDispatch, useAppSelector } from '~/hooks/useTypeSelector'
 import { getCategoryList } from '~/store/reducers/categorySlice'
 import { getColorList } from '~/store/reducers/colorsSlice'
 import { getProductList } from '~/store/reducers/productSlice'
+import { formatCurrency } from '~/utils/fomatter'
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd'
 
 function ProductList() {
-  // Get state from store
   const { listProductIds, listProduct } = useAppSelector((state) => state.products)
   const { listCategory } = useAppSelector((state) => state.categories)
   const { listColor } = useAppSelector((state) => state.colors)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    // Dispatch action to get product list
     dispatch(getProductList())
     dispatch(getCategoryList())
     dispatch(getColorList())
   }, [dispatch])
 
-  const rows = Object.keys(listProduct).map(id => ({
-    name: listProduct[Number(id)].name,
-    available: listProduct[Number(id)].available,
-    sold: listProduct[Number(id)].sold,
-    category: listCategory[listProduct[Number(id)].categoryId]?.name,
-    price: listProduct[Number(id)].price,
-  }));
+  // Object.keys(listProduct) or listProductIds
+  const tableDataList = listProductIds.map((id) => {
+    const convertId = Number(id)
+    let colorString = ''
+
+    listProduct[convertId].colorIds?.forEach((color) => {
+      colorString += colorString ? ` - ${listColor[color]?.name}` : listColor[color]?.name
+    })
+
+    return {
+      name: listProduct[convertId].name,
+      available: listProduct[convertId].available,
+      sold: listProduct[convertId].sold,
+      category: listCategory[listProduct[convertId].categoryId]?.name,
+      price: formatCurrency(listProduct[convertId].price),
+      colors: colorString,
+    }
+  })
 
   // Calculate total available, sold, revenue
   const { totalAvailable, sold, revenue } = useMemo(() => {
@@ -42,51 +53,24 @@ function ProductList() {
   }, [listProductIds, listProduct])
 
   return (
-    <div>
-      <h1>Seller</h1>
-      <ul style={{ display: 'flex', alignItems: 'center', gap: '1rem', listStyle: 'none' }}>
-        <li>Total: {listProductIds?.length}</li>
-        <li>Avaiable: {totalAvailable}</li>
-        <li>Sold: {sold}</li>
-        <li>Revenue: {revenue}</li>
-      </ul>
-      <ul>
-        {listProductIds.map((id, index) => {
-          let colorString = ''
-          listProduct[id].colorIds?.forEach((color) => {
-            colorString += listColor[color]?.name + ' '
-          })
-
-          return (
-            <li key={id}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: 2,
-                }}
-              >
-                <Box>
-                  {index + 1}. {listProduct[id].name} - {listProduct[id].available} -{' '}
-                  {listProduct[id].sold} - {listCategory[listProduct[id].categoryId]?.name} -
-                  color::
-                  {colorString} {listProduct[id].price}
-                </Box>
-                <Box sx={{ display: 'flex', gap: 1 }}>
-                  <Button variant="outlined">Edit</Button>
-                  <Button variant="outlined" color="error">
-                    Remove
-                  </Button>
-                </Box>
-              </Box>
-            </li>
-          )
-        })}
-      </ul>
-
-      <ProductTable rows={rows} />
-    </div>
+    <Box>
+      <Typography variant="h3">Product List</Typography>
+      <Box
+        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 3 }}
+        mb={3}
+      >
+        <Box style={{ display: 'flex', alignItems: 'center', gap: '1rem', listStyle: 'none' }}>
+          <Box>Total: {listProductIds?.length}</Box>
+          <Box>Avaiable: {totalAvailable}</Box>
+          <Box>Sold: {sold}</Box>
+          <Box>Revenue: {formatCurrency(revenue)}</Box>
+        </Box>
+        <Button variant="outlined" color="success" startIcon={<LibraryAddIcon />}>
+          Add
+        </Button>
+      </Box>
+      <ProductTable rows={tableDataList} />
+    </Box>
   )
 }
 

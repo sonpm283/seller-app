@@ -90,6 +90,15 @@
       "categoryId": 2,
       "colorIds": [3, 2],
       "price": 260000
+    },
+    {
+      "id": 6,
+      "name": "Hand Bag with metal strap1",
+      "available": 19,
+      "sold": 18,
+      "categoryId": 2,
+      "colorIds": [4, 2],
+      "price": 560000
     }
   ]
 }
