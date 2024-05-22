@@ -2,21 +2,17 @@ import { useState } from 'react'
 import Box from '@mui/material/Box'
 import ModeSelect from '~/components/ModeSelect/ModeSelect'
 import AppsIcon from '@mui/icons-material/Apps'
-// import { ReactComponent as Vite } from '~/assets/vite.svg'
+// import { ReactComponent as Vite } from '~/assets/loading.svg'
 // import SvgIcon from '@mui/material/SvgIcon'
 import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Badge from '@mui/material/Badge'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import Tooltip from '@mui/material/Tooltip'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
-import LibraryAddIcon from '@mui/icons-material/LibraryAdd'
 import InputAdornment from '@mui/material/InputAdornment'
 import SearchIcon from '@mui/icons-material/Search'
 import CloseIcon from '@mui/icons-material/Close'
-import Recent from './Menus/Recent'
-import Starred from './Menus/Starred'
 
 function AppBar() {
   const [searchValue, setSearchValue] = useState('')
@@ -30,13 +26,21 @@ function AppBar() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        gap: 2,
         paddingX: 2,
         overflowX: 'auto',
-        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#2c3e50' : '#084cc0'),
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#2c3e50' : '#16a085'),
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+      <Box
+        sx={{
+          width: '284px',
+          borderRight: (theme) => `2px solid ${theme.palette.grey[400]}`,
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2,
+        }}
+      >
         <AppsIcon sx={{ color: 'white' }} />
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
           {/* <SvgIcon component={Vite} fontSize="small" inheritViewBox sx={{ color: 'white' }} /> */}
@@ -47,28 +51,12 @@ function AppBar() {
             Sellerapp
           </Typography>
         </Box>
-
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}>
-          <Recent />
-          <Starred />
-          <Button
-            sx={{
-              color: 'white',
-              border: 'none',
-              '&:hover': { border: 'none' },
-            }}
-            variant="outlined"
-            startIcon={<LibraryAddIcon />}
-          >
-            Create
-          </Button>
-        </Box>
       </Box>
 
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1 }} ml={2}>
         <TextField
           id="outlined-search"
-          label="Search..."
+          label="Find Anything..."
           type="text"
           size="small"
           value={searchValue}
@@ -90,8 +78,7 @@ function AppBar() {
             ),
           }}
           sx={{
-            minWidth: '120px',
-            maxWidth: '180px',
+            minWidth: '300px',
             '& label': { color: 'white' },
             '& input': { color: 'white' },
             '& label.Mui-focused': { color: 'white' },
@@ -103,7 +90,9 @@ function AppBar() {
           }}
         />
 
-        <ModeSelect />
+        <Box sx={{ marginLeft: 'auto' }}>
+          <ModeSelect />
+        </Box>
 
         <Tooltip title="Notifications">
           <Badge color="warning" variant="dot" sx={{ cursor: 'pointer' }}>

@@ -15,10 +15,13 @@ export default function MainLayout(props: Props) {
   }))
 
   return (
-    <div>
+    <>
       <AppBar />
-      <Grid container sx={{ height: (theme) => theme.sellerApp.boardContentHeight, minWidth: '1200px' }}>
-        <Grid item sx={{ borderRight: '2px solid #dcdfe4', width: '200px'}}>
+      <Grid
+        container
+        sx={{ height: (theme) => theme.sellerApp.boardContentHeight, minWidth: '1200px' }}
+      >
+        <Grid item sx={{ borderRight: (theme) => `2px solid ${theme.palette.grey[400]}`, width: '300px' }}>
           <Item sx={{ height: '100%' }}>
             <Sidebar />
           </Item>
@@ -27,6 +30,6 @@ export default function MainLayout(props: Props) {
           <Item sx={{ height: '100%' }}>{children}</Item>
         </Grid>
       </Grid>
-    </div>
+    </>
   )
 }

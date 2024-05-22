@@ -9,6 +9,7 @@ import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined'
 import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness'
 
 type Mode = 'light' | 'dark' | 'system'
+
 function ModeSelect() {
   const { mode, setMode } = useColorScheme()
 

@@ -1,4 +1,4 @@
-import { Box, SvgIcon, styled } from '@mui/material'
+import { Box, SvgIcon, Typography, styled } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { ReactComponent as TimeLineIcon } from '~/assets/timeline.svg'
 import { ReactComponent as CategoryIcon } from '~/assets/category.svg'
@@ -8,7 +8,8 @@ const StyledLink = styled(NavLink)(({ theme }) => ({
   textDecoration: 'none',
   padding: theme.spacing(1),
   color: theme.palette.text.primary,
-  '&.active': {
+  '&.active, &:hover': {
+    transition: 'all .2s ease',
     backgroundColor: theme.palette.action.selected,
   },
   display: 'flex',
@@ -17,29 +18,42 @@ const StyledLink = styled(NavLink)(({ theme }) => ({
   gap: 5,
 }))
 
+const MenuItem = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: 0.5,
+  '& + &': {
+    marginTop: theme.spacing(1),
+  },
+}))
+
 export default function Sidebar() {
   return (
     <Box>
-      <Box>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-          <StyledLink to="/seller/products">
-            <SvgIcon component={TimeLineIcon} fontSize="medium" inheritViewBox />
+      <MenuItem>
+        <StyledLink to="/seller/products">
+          <SvgIcon component={TimeLineIcon} fontSize="medium" inheritViewBox />
+          <Typography variant="body1" pt={0.25} >
             Product
-          </StyledLink>
-        </Box>
-      </Box>
-      <Box>
+          </Typography>
+        </StyledLink>
+      </MenuItem>
+      <MenuItem>
         <StyledLink to="/seller/categories">
           <SvgIcon component={CategoryIcon} fontSize="medium" inheritViewBox />
-          Categories
+          <Typography variant="body1" pt={0.25}>
+            Categories
+          </Typography>
         </StyledLink>
-      </Box>
-      <Box>
+      </MenuItem>
+      <MenuItem>
         <StyledLink to="/seller/colors">
           <SvgIcon component={ColorsIcon} fontSize="medium" inheritViewBox />
-          Colors
+          <Typography variant="body1" pt={0.25}>
+            Colors
+          </Typography>
         </StyledLink>
-      </Box>
+      </MenuItem>
     </Box>
   )
 }
