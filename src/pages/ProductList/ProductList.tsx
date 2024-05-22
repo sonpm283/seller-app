@@ -1,24 +1,25 @@
 import { useEffect, useMemo } from 'react'
 import { useAppDispatch, useAppSelector } from '~/hooks/useTypeSelector'
-import { getProductList, increment } from '~/store/reducers/productSlice'
+import { getCategoryList } from '~/store/reducers/categorySlice'
+import { getColorList } from '~/store/reducers/colorsSlice'
+import { getProductList } from '~/store/reducers/productSlice'
 
 function ProductList() {
   // Get state from store
-  const { listProductIds, listProduct, count } = useAppSelector((state) => state.products)
+  const { listProductIds, listProduct } = useAppSelector((state) => state.products)
+  const { listCategory } = useAppSelector((state) => state.categories)
+  const { listColor } = useAppSelector((state) => state.colors)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     // Dispatch action to get product list
     dispatch(getProductList())
+    dispatch(getCategoryList())
+    dispatch(getColorList())
   }, [dispatch])
-
-  const handleIncrement = () => {
-    dispatch(increment(1))
-  }
 
   // Calculate total available, sold, revenue
   const { totalAvailable, sold, revenue } = useMemo(() => {
-    
     return listProductIds.reduce(
       (acc, id) => {
         acc.totalAvailable += listProduct[id].available
@@ -32,10 +33,7 @@ function ProductList() {
 
   return (
     <div>
-      <h1>Product List</h1>
-      <button type="button" style={{ border: '1px solid' }} onClick={handleIncrement}>
-        count: {count}
-      </button>
+      <h1>Seller</h1>
       <ul style={{ display: 'flex', alignItems: 'center', gap: '1rem', listStyle: 'none' }}>
         <li>Total: {listProductIds?.length}</li>
         <li>Avaiable: {totalAvailable}</li>
@@ -43,13 +41,23 @@ function ProductList() {
         <li>Revenue: {revenue}</li>
       </ul>
       <ul>
-        {listProductIds.map((id, index) => (
-          <li key={id}>
-            {index + 1}.{listProduct[id].name} - {listProduct[id].available} -{' '}
-            {listProduct[id].sold} - {listProduct[id].categoryId} - {listProduct[id].colorIds}{' '}
-            {listProduct[id].price}
-          </li>
-        ))}
+        {listProductIds.map((id, index) => {
+          let colorString = ''
+          listProduct[id].colorIds?.forEach((color) => {
+            colorString += listColor[color]?.name + ' '
+          })
+
+          return (
+            <li key={id}>
+              {index + 1}. {listProduct[id].name} - {listProduct[id].available} -{' '}
+              {listProduct[id].sold} - {listCategory[listProduct[id].categoryId]?.name} -{' '}
+              color::{colorString} {listProduct[id].price}
+              
+              <button>Edit</button>
+              <button>Remove</button>
+            </li>
+          )
+        })}
       </ul>
     </div>
   )
