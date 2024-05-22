@@ -39,11 +39,7 @@ const productSlice = createSlice({
   name: REDUCERS.COLORS,
   initialState: inititalState,
   // Define reducers for the synchronous action
-  reducers: {
-    // increment: (state, action: PayloadAction<number>) => {
-    //   state.count += action.payload
-    // },
-  },
+  reducers: {},
 
   // Define reducers for the asynchronous action
   extraReducers: (builder) => {
