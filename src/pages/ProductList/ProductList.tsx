@@ -1,4 +1,6 @@
+import { Box, Button } from '@mui/material'
 import { useEffect, useMemo } from 'react'
+import ProductTable from '~/components/ProductTable'
 import { useAppDispatch, useAppSelector } from '~/hooks/useTypeSelector'
 import { getCategoryList } from '~/store/reducers/categorySlice'
 import { getColorList } from '~/store/reducers/colorsSlice'
@@ -17,6 +19,14 @@ function ProductList() {
     dispatch(getCategoryList())
     dispatch(getColorList())
   }, [dispatch])
+
+  const rows = Object.keys(listProduct).map(id => ({
+    name: listProduct[Number(id)].name,
+    available: listProduct[Number(id)].available,
+    sold: listProduct[Number(id)].sold,
+    category: listCategory[listProduct[Number(id)].categoryId]?.name,
+    price: listProduct[Number(id)].price,
+  }));
 
   // Calculate total available, sold, revenue
   const { totalAvailable, sold, revenue } = useMemo(() => {
@@ -49,16 +59,33 @@ function ProductList() {
 
           return (
             <li key={id}>
-              {index + 1}. {listProduct[id].name} - {listProduct[id].available} -{' '}
-              {listProduct[id].sold} - {listCategory[listProduct[id].categoryId]?.name} -{' '}
-              color::{colorString} {listProduct[id].price}
-              
-              <button>Edit</button>
-              <button>Remove</button>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: 2,
+                }}
+              >
+                <Box>
+                  {index + 1}. {listProduct[id].name} - {listProduct[id].available} -{' '}
+                  {listProduct[id].sold} - {listCategory[listProduct[id].categoryId]?.name} -
+                  color::
+                  {colorString} {listProduct[id].price}
+                </Box>
+                <Box sx={{ display: 'flex', gap: 1 }}>
+                  <Button variant="outlined">Edit</Button>
+                  <Button variant="outlined" color="error">
+                    Remove
+                  </Button>
+                </Box>
+              </Box>
             </li>
           )
         })}
       </ul>
+
+      <ProductTable rows={rows} />
     </div>
   )
 }

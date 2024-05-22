@@ -39,11 +39,7 @@ const productSlice = createSlice({
   name: REDUCERS.PRODUCTS,
   initialState: inititalState,
   // Define reducers for the synchronous action
-  reducers: {
-    // increment: (state, action: PayloadAction<number>) => {
-    //   state.count += action.payload
-    // },
-  },
+  reducers: {},
 
   // Define reducers for the asynchronous action
   extraReducers: (builder) => {
@@ -55,6 +51,7 @@ const productSlice = createSlice({
         state.stage = 'succeeded'
 
         if (action.payload) {
+          // process data
           const convertData = action.payload.reduce(
             (
               acc: { listIds: number[]; listProduct: Record<number, Product> },
@@ -67,6 +64,7 @@ const productSlice = createSlice({
             { listIds: [], listProduct: {} },
           )
 
+          // update state
           state.listProductIds = convertData.listIds
           state.listProduct = convertData.listProduct
         }
