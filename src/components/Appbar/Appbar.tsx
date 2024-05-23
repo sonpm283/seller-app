@@ -34,7 +34,6 @@ function AppBar() {
       <Box
         sx={{
           width: '284px',
-          borderRight: (theme) => `2px solid ${theme.palette.grey[400]}`,
           height: '100%',
           display: 'flex',
           alignItems: 'center',
@@ -48,12 +47,12 @@ function AppBar() {
             variant="body1"
             sx={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'white' }}
           >
-            Sellerapp
+            Seller App
           </Typography>
         </Box>
       </Box>
 
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1 }} ml={2}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1 }} ml={10}>
         <TextField
           id="outlined-search"
           label="Find Anything..."
@@ -78,7 +77,7 @@ function AppBar() {
             ),
           }}
           sx={{
-            minWidth: '300px',
+            minWidth: '400px',
             '& label': { color: 'white' },
             '& input': { color: 'white' },
             '& label.Mui-focused': { color: 'white' },

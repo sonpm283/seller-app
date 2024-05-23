@@ -18,6 +18,7 @@ export const COLOR_API = {
 
 export const ACTIONS = {
   GET_PRODUCT_LIST: 'products/getProductList',
+  CREATE_PRODUCT: 'products/createProduct',
   GET_CATEGORY_LIST: 'categories/getCategoryList',
   GET_COLOR_LIST: 'colors/getColorList',
 }
