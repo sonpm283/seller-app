@@ -1,5 +1,5 @@
 import axiosClient from '~/utils/httpClient'
-import { Product } from '~/types/product.type'
+import { CreateProduct, Product } from '~/types/product.type'
 import { PRODUCT_API } from '~/constants'
 
 const productApi = {
@@ -7,9 +7,9 @@ const productApi = {
     const url = PRODUCT_API.PRODUCTS
     return axiosClient.get<Product[]>(url)
   },
-  addProduct(data: Omit<Product, 'id'>) {
+  addProduct(data: CreateProduct) {
     const url = PRODUCT_API.PRODUCTS
-    return axiosClient.post<Product>(url, data)
+    return axiosClient.post<Product>(url, {...data, sold: 0, colorIds: [], categoryId: 1})
   },
   updateProduct(data: Product) {
     const url = `${PRODUCT_API.PRODUCTS}/${data.id}`

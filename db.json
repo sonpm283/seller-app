@@ -120,55 +120,25 @@
       "price": 560000
     },
     {
-      "id": "89f7",
-      "name": "T-shirt long sleeve",
-      "available": 23,
-      "sold": 10,
-      "categoryId": 1,
+      "id": "7",
+      "name": "Hand Bag with metal strap2",
+      "available": 19,
+      "sold": 18,
+      "categoryId": 2,
       "colorIds": [
-        1,
-        4
+        4,
+        2
       ],
-      "price": 300000
+      "price": 560000
     },
     {
-      "id": "1",
-      "name": "T-shirt long sleeve",
-      "available": 23,
-      "sold": 10,
-      "categoryId": 1,
-      "colorIds": [
-        1,
-        4
-      ],
-      "price": 300000
-    },
-    {
-      "id": "6f8c",
-      "name": "T-shirt long sleevexxxxxxx",
-      "available": 23,
-      "sold": 10,
-      "categoryId": 1,
-      "colorIds": [
-        1,
-        4
-      ],
-      "price": 300000
-    },
-    {
-      "id": "d8b3"
-    },
-    {
-      "id": "f568",
-      "name": "Accessory 10"
-    },
-    {
-      "id": "26f6",
-      "name": "sdf",
-      "avaiable": "sdfds",
-      "sold": "sdf",
-      "color": "sdf",
-      "price": "sdf"
+      "id": "0319",
+      "name": "32",
+      "available": "324",
+      "price": "324",
+      "sold": 0,
+      "colorIds": [],
+      "categoryId": 1
     }
   ]
 }

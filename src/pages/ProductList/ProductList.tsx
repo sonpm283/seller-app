@@ -22,19 +22,18 @@ function ProductList() {
 
   // Object.keys(listProduct) or listProductIds
   const tableDataList = Object.keys(listProduct).map((id) => {
-    const convertId = Number(id)
     let colorString = ''
 
-    listProduct[convertId].colorIds?.forEach((color) => {
+    listProduct[id]?.colorIds?.forEach((color) => {
       colorString += colorString ? ` - ${listColor[color]?.name}` : listColor[color]?.name
     })
 
     return {
-      name: listProduct[convertId].name,
-      available: listProduct[convertId].available,
-      sold: listProduct[convertId].sold,
-      category: listCategory[listProduct[convertId].categoryId]?.name,
-      price: formatCurrency(listProduct[convertId].price),
+      name: listProduct[id].name,
+      available: listProduct[id].available,
+      sold: listProduct[id].sold,
+      category: listCategory[listProduct[id].categoryId]?.name,
+      price: formatCurrency(listProduct[id].price),
       colors: colorString,
     }
   })

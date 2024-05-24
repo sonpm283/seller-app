@@ -9,9 +9,9 @@ const Statistical = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   flexDirection: 'column',
-  padding: '5px 25px',
+  padding: '5px 20px',
   backgroundColor: theme.palette.mode === 'dark' ? 'rgb(81 81 81)' : '#f3f3f3',
-  borderRadius: '10px',
+  borderRadius: '5px',
 }))
 
 interface Statis {

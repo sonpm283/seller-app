@@ -9,14 +9,16 @@ import { Category } from '~/types/category.type'
 interface CustomSelectBox<T> {
   title: string
   options: { [key: string]: T }
+  onSelect: (value: number) => void
 }
 
 export default function CustomSelectBox(props: CustomSelectBox<Category>) {
-  const { title, options } = props
+  const { title, options, onSelect } = props
   const [selectValue, setSelectValue] = useState('')
 
   const handleChange = (event: SelectChangeEvent) => {
     setSelectValue(event.target.value as string)
+    onSelect(Number(event.target.value))
   }
   return (
     <Box sx={{ minWidth: 120 }}>
