@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '~/hooks/useTypeSelector'
 import { getCategoryList } from '~/store/reducers/categorySlice'
 import { getColorList } from '~/store/reducers/colorsSlice'
 import { getProductList } from '~/store/reducers/productSlice'
-import { formatCurrency } from '~/utils/fomatter'
+import { capitalizeFirstLetter, formatCurrency } from '~/utils/fomatters'
 import SellerStats from './components/SellerStats/SellerStats'
 
 function ProductList() {
@@ -21,14 +21,17 @@ function ProductList() {
   }, [dispatch])
 
   // Object.keys(listProduct) or listProductIds
-  const tableDataList = Object.keys(listProduct).map((id) => {
+  const tableDataList = listProductIds.map((id) => {
     let colorString = ''
 
     listProduct[id]?.colorIds?.forEach((color) => {
-      colorString += colorString ? ` - ${listColor[color]?.name}` : listColor[color]?.name
+      colorString += colorString
+        ? ` - ${capitalizeFirstLetter(listColor[color]?.name)}`
+        : capitalizeFirstLetter(listColor[color]?.name)
     })
 
     return {
+      id: id,
       name: listProduct[id].name,
       available: listProduct[id].available,
       sold: listProduct[id].sold,
@@ -42,9 +45,9 @@ function ProductList() {
   const statis = useMemo(() => {
     return listProductIds.reduce(
       (acc, id) => {
-        acc.totalAvailable += listProduct[id].available
-        acc.sold += listProduct[id].sold
-        acc.revenue += listProduct[id].sold * listProduct[id].price
+        acc.totalAvailable += Number(listProduct[id].available)
+        acc.sold += Number(listProduct[id].sold)
+        acc.revenue += Number(listProduct[id].sold * listProduct[id].price)
         return acc
       },
       { totalAvailable: 0, sold: 0, revenue: 0 },
@@ -54,7 +57,7 @@ function ProductList() {
   return (
     <Box>
       <Typography variant="h3">Seller</Typography>
-      <SellerStats statis={statis}/>
+      <SellerStats statis={statis} />
       <ProductTable rows={tableDataList} />
     </Box>
   )

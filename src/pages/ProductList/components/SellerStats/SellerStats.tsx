@@ -2,8 +2,7 @@ import { Box, Typography } from '@mui/material'
 import { styled } from '@mui/system'
 import CustomCreatePostButton from '~/components/MuiCustom/custom-create-product-button'
 import { useAppSelector } from '~/hooks/useTypeSelector'
-import { formatCurrency } from '~/utils/fomatter'
-// import CustomFormDialog from '~/components/CustomFormDialog'
+import { formatCurrency } from '~/utils/fomatters'
 
 const Statistical = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -20,11 +19,11 @@ interface Statis {
   revenue: number
 }
 
-interface StaticProps {
+interface StatisProps {
   statis: Statis
 }
 
-export default function SellerStats({ statis }: StaticProps) {
+export default function SellerStats({ statis }: StatisProps) {
   const { listProductIds } = useAppSelector((state) => state.products)
 
   return (

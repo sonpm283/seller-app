@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper'
 import { Box, Button, Pagination } from '@mui/material'
 
 interface ProductData {
+  id: string
   name: string
   available: number
   sold: number
@@ -47,7 +48,7 @@ export default function ProductTable({ rows }: DataTableProps<ProductData>) {
           </TableHead>
           <TableBody>
             {rows.map((row, index) => (
-              <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell component="th" scope="row">
                   {index + 1}
                 </TableCell>

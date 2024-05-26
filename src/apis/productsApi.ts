@@ -9,7 +9,7 @@ const productApi = {
   },
   addProduct(data: CreateProduct) {
     const url = PRODUCT_API.PRODUCTS
-    return axiosClient.post<Product>(url, {...data, sold: 0, colorIds: [], categoryId: 1})
+    return axiosClient.post<Product>(url, { ...data, sold: 0 })
   },
   updateProduct(data: Product) {
     const url = `${PRODUCT_API.PRODUCTS}/${data.id}`

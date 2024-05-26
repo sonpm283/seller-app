@@ -6,13 +6,13 @@ import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { useState } from 'react'
 import { Category } from '~/types/category.type'
 
-interface CustomSelectBox<T> {
+interface CustomSelectBox {
   title: string
-  options: { [key: string]: T }
+  options: { [key: string]: Category }
   onSelect: (value: number) => void
 }
 
-export default function CustomSelectBox(props: CustomSelectBox<Category>) {
+export default function CustomSelectBox(props: CustomSelectBox) {
   const { title, options, onSelect } = props
   const [selectValue, setSelectValue] = useState('')
 

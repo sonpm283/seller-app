@@ -13,8 +13,9 @@ import { CreateProduct } from '~/types/product.type'
 import { createProduct } from '~/store/reducers/productSlice'
 import { toast } from 'react-toastify'
 import FieldErrorAlert from '../Form/FieldErrorAlert'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { FIELD_REQUIRED_MESSAGE } from '~/utils/validators'
+import { FormInputMultiCheckbox } from './FormInputMultiCheckbox'
 interface CustomProductDialogFormProps {
   isOpen: boolean
   children?: React.ReactNode
@@ -30,19 +31,29 @@ export default function CustomProductDialogForm(props: CustomProductDialogFormPr
 
   const handleClose = () => {
     setOpen(false)
+    reset()
   }
 
   const {
-    register,
     handleSubmit,
+    control,
+    setValue,
+    reset,
     formState: { errors },
-  } = useForm<CreateProduct>()
+  } = useForm<CreateProduct>({
+    defaultValues: {
+      name: '',
+      available: 1,
+      price: 50000,
+      colorIds: [],
+    },
+  })
 
   const onSubmit = (data: CreateProduct) => {
-    console.log(data);
-    
+    console.log(data)
+
     dispatch(createProduct(data))
-    toast('Create Product Successfully!!', {
+    toast('Create product successfully!!', {
       position: 'bottom-left',
       autoClose: 2000,
     })
@@ -69,54 +80,89 @@ export default function CustomProductDialogForm(props: CustomProductDialogFormPr
         </DialogTitle>
         <DialogContent>
           <Box sx={{ padding: '0 1em 1em 1em' }}>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Name"
-              type="text"
-              fullWidth
-              error={!!errors['name']}
-              variant="standard"
-              {...register('name', {
-                required: FIELD_REQUIRED_MESSAGE,
-              })}
+            <Controller
+              name="name"
+              control={control}
+              rules={{ required: FIELD_REQUIRED_MESSAGE }}
+              render={({ field }) => (
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="name"
+                  label="Name"
+                  type="text"
+                  fullWidth
+                  error={!!errors['name']}
+                  variant="standard"
+                  {...field}
+                />
+              )}
             />
             <FieldErrorAlert errorMessage={errors.name?.message} />
           </Box>
           <Box sx={{ padding: '0 1em 1em 1em' }}>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="avaiable"
-              label="Avaiable"
-              type="text"
-              fullWidth
-              variant="standard"
-              error={!!errors['available']}
-              {...register('available', {
-                required: FIELD_REQUIRED_MESSAGE,
-              })}
+            <Controller
+              name="available"
+              control={control}
+              rules={{ required: FIELD_REQUIRED_MESSAGE }}
+              render={({ field }) => (
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="available"
+                  label="Avaiable"
+                  type="number"
+                  fullWidth
+                  error={!!errors['available']}
+                  variant="standard"
+                  {...field}
+                />
+              )}
             />
             <FieldErrorAlert errorMessage={errors.available?.message} />
           </Box>
           <Box sx={{ padding: '0 1em 1em 1em' }}>
-            <CustomSelectBox title="Category" options={listCategory} onSelect={(value: number) => console.log(value)} />
-            <FieldErrorAlert errorMessage={errors.available?.message} />
+            <Controller
+              name="categoryId"
+              control={control}
+              rules={{ required: FIELD_REQUIRED_MESSAGE }}
+              render={({ field }) => (
+                <CustomSelectBox
+                  title="Category"
+                  options={listCategory}
+                  onSelect={(value: number) => field.onChange(value)}
+                />
+              )}
+            />
+            <FieldErrorAlert errorMessage={errors.categoryId?.message} />
           </Box>
           <Box sx={{ padding: '0 1em 1em 1em' }}>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="price"
-              label="Price"
-              type="number"
-              fullWidth
-              error={!!errors['price']}
-              variant="standard"
-              {...register('price', {
-                required: FIELD_REQUIRED_MESSAGE,
-              })}
+            <FormInputMultiCheckbox
+              name="colorIds"
+              control={control}
+              setValue={setValue}
+              error={errors.colorIds?.message}
+              label="Colors"
+            />
+          </Box>
+          <Box sx={{ padding: '0 1em 1em 1em' }}>
+            <Controller
+              name="price"
+              control={control}
+              rules={{ required: FIELD_REQUIRED_MESSAGE }}
+              render={({ field }) => (
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="price"
+                  label="Price"
+                  type="number"
+                  fullWidth
+                  error={!!errors['price']}
+                  variant="standard"
+                  {...field}
+                />
+              )}
             />
             <FieldErrorAlert errorMessage={errors.price?.message} />
           </Box>

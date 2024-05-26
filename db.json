@@ -15,10 +15,6 @@
     {
       "id": "3",
       "name": "Accessory"
-    },
-    {
-      "id": "4",
-      "name": "Accessory 2"
     }
   ],
   "colors": [
@@ -109,36 +105,97 @@
     },
     {
       "id": "6",
-      "name": "Hand Bag with metal strap1",
-      "available": 19,
-      "sold": 18,
-      "categoryId": 2,
+      "name": "Pink hat",
+      "available": 10,
+      "sold": 3,
+      "categoryId": 3,
       "colorIds": [
-        4,
-        2
+        4
       ],
-      "price": 560000
+      "price": 150000
     },
     {
       "id": "7",
-      "name": "Hand Bag with metal strap2",
-      "available": 19,
-      "sold": 18,
-      "categoryId": 2,
+      "name": "Blue hat",
+      "available": 10,
+      "sold": 3,
+      "categoryId": 3,
       "colorIds": [
-        4,
-        2
+        5
       ],
-      "price": 560000
+      "price": 150000
     },
     {
-      "id": "0319",
-      "name": "32",
-      "available": "324",
-      "price": "324",
-      "sold": 0,
-      "colorIds": [],
-      "categoryId": 1
+      "id": "8",
+      "name": "Black hat",
+      "available": 10,
+      "sold": 3,
+      "categoryId": 3,
+      "colorIds": [
+        3
+      ],
+      "price": 150000
+    },
+    {
+      "id": "9",
+      "name": "Yellow hat",
+      "available": 10,
+      "sold": 3010,
+      "categoryId": 3,
+      "colorIds": [
+        2
+      ],
+      "price": 150000
+    },
+    {
+      "id": "10",
+      "name": "White hat",
+      "available": 10,
+      "sold": 3,
+      "categoryId": 3,
+      "colorIds": [
+        1
+      ],
+      "price": 150000
+    },
+    {
+      "id": "305a",
+      "name": "sdf",
+      "available": "234",
+      "price": 50000,
+      "colorIds": [
+        "1",
+        "2"
+      ],
+      "categoryId": 2,
+      "sold": 0
+    },
+    {
+      "id": "d688",
+      "name": "Hat Yellow",
+      "available": 1,
+      "price": 50000,
+      "colorIds": [
+        "2",
+        "4",
+        "3"
+      ],
+      "categoryId": 1,
+      "sold": 0
+    },
+    {
+      "id": "fc75",
+      "name": "234",
+      "available": "1234",
+      "price": 50000,
+      "colorIds": [
+        "2",
+        "3",
+        "1",
+        "4"
+      ],
+      "categoryId": 1,
+      "sold": 0
     }
   ]
 }
