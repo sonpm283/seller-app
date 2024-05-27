@@ -49,16 +49,16 @@
   ],
   "products": [
     {
-      "id": "1",
-      "name": "T-shirt long sleeve",
-      "available": 23,
-      "sold": 10,
-      "categoryId": 1,
+      "name": "sondzvd",
+      "available": 1,
+      "price": "44568",
       "colorIds": [
-        1,
-        4
+        6,
+        1
       ],
-      "price": 300000
+      "categoryId": 1,
+      "sold": 0,
+      "id": "1"
     },
     {
       "id": "2",
@@ -85,27 +85,39 @@
       "price": 370000
     },
     {
-      "id": "4",
-      "name": "Silver necklace",
-      "available": 30,
-      "sold": 1,
-      "categoryId": 3,
+      "id": "8e1a",
+      "name": "343243243",
+      "available": "1324324",
+      "price": "500002343243",
       "colorIds": [
-        5
+        2,
+        4
       ],
-      "price": 1450000
+      "categoryId": 2,
+      "sold": 0
     },
     {
-      "id": "5",
-      "name": "Hand Bag with metal strap",
-      "available": 5,
-      "sold": 1,
-      "categoryId": 2,
+      "id": "2f43",
+      "name": "32432432",
+      "available": 1,
+      "price": "50000324324",
       "colorIds": [
-        3,
-        2
+        4
       ],
-      "price": 260000
+      "categoryId": 3,
+      "sold": 0
+    },
+    {
+      "id": "0313",
+      "name": "234",
+      "available": "13324324",
+      "price": "50000324324",
+      "colorIds": [
+        2,
+        5
+      ],
+      "categoryId": 3,
+      "sold": 0
     }
   ]
 }

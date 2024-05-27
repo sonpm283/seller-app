@@ -9,7 +9,7 @@ import { PostAdd } from '@mui/icons-material'
 import { useAppDispatch, useAppSelector } from '~/hooks/useTypeSelector'
 import CustomSelectBox from './custom-select-box'
 import { CreateProduct } from '~/types/product.type'
-import { cancelEditingProduct, createProduct } from '~/store/reducers/productSlice'
+import { cancelEditingProduct, createProduct, updateProduct } from '~/store/reducers/productSlice'
 import { toast } from 'react-toastify'
 import FieldErrorAlert from '../Form/FieldErrorAlert'
 import { Controller, useForm } from 'react-hook-form'
@@ -42,7 +42,7 @@ export default function CustomProductDialogForm(props: CustomProductDialogFormPr
       // categoryId: 0,
       price: 50000,
       colorIds: [],
-    }
+    },
   })
 
   const handleClose = () => {
@@ -52,8 +52,13 @@ export default function CustomProductDialogForm(props: CustomProductDialogFormPr
   }
 
   const onSubmit = (data: CreateProduct) => {
-    dispatch(createProduct(data))
-    toast('Create product successfully!!', {
+    if (productEditing) {
+      dispatch(updateProduct({ id: productEditing?.id, productUpdate: data }))
+    } else {
+      dispatch(createProduct(data))
+    }
+
+    toast(`${productEditing ? 'Edit' : 'Create'} product successfully!!`, {
       position: 'bottom-left',
       autoClose: 2000,
     })
@@ -189,7 +194,7 @@ export default function CustomProductDialogForm(props: CustomProductDialogFormPr
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Add</Button>
+          <Button type="submit">Save</Button>
         </DialogActions>
       </form>
     </Dialog>

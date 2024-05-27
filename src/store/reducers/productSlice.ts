@@ -43,7 +43,7 @@ export const createProduct = createAsyncThunk(ACTIONS.CREATE_PRODUCT, async (new
 // Update product
 export const updateProduct = createAsyncThunk(
   'products/updateProduct',
-  async ({ id, productUpdate }: { id: string; productUpdate: Product }, thunkApi) => {
+  async ({ id, productUpdate }: { id: string; productUpdate: CreateProduct }, thunkApi) => {
     try {
       const response = await productApi.updateProduct(id, productUpdate)
 
@@ -120,6 +120,9 @@ const productSlice = createSlice({
           state.listProductIds.push(action.payload.id)
           state.listProduct = { ...state.listProduct, [action.payload.id]: action.payload }
         }
+      })
+      .addCase(updateProduct.fulfilled, (state, action: PayloadAction<Product>) => {
+        state.listProduct[action.payload.id] = action.payload
       })
       .addCase(deleteProduct.fulfilled, (state, action: PayloadAction<Product>) => {
         state.stage = 'succeeded'

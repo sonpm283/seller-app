@@ -11,9 +11,9 @@ const productApi = {
     const url = PRODUCT_API.PRODUCTS
     return axiosClient.post<Product>(url, { ...data, sold: 0 })
   },
-  updateProduct(productId: string, data: Product) {
+  updateProduct(productId: string, data: CreateProduct) {
     const url = `${PRODUCT_API.PRODUCTS}/${productId}`
-    return axiosClient.put<Product>(url, data)
+    return axiosClient.put<Product>(url, { ...data, sold: 0 })
   },
   deleteProduct(id: string) {
     const url = `${PRODUCT_API.PRODUCTS}/${id}`
