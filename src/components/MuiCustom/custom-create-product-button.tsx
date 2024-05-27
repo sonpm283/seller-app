@@ -1,24 +1,28 @@
 import Button from '@mui/material/Button'
 import CustomProductDialogForm from './custom-product-dialog-form'
-import LibraryAddIcon from '@mui/icons-material/LibraryAdd'
-import { useState } from 'react'
-
+import React, { useState } from 'react'
 interface CustomCreatePostButtonProps {
   title: string
+  color?: 'error' | 'success' | 'primary' | 'secondary' | 'info' | 'warning'
+  icon: React.ReactNode
   children?: React.ReactNode
+  onUpdatePost?: () => void
 }
 
 export default function CustomCreatePostButton(props: CustomCreatePostButtonProps) {
-  const { title } = props
+  const { title, color, icon, onUpdatePost } = props
   const [openDialog, setOpenDialog] = useState(false)
 
   return (
     <>
       <Button
-        onClick={() => setOpenDialog(true)}
+        onClick={() => {
+          setOpenDialog(true)
+          if (onUpdatePost) onUpdatePost()
+        }}
         variant="outlined"
-        color="success"
-        startIcon={<LibraryAddIcon />}
+        color={color}
+        startIcon={icon}
         sx={{ ml: 1 }}
       >
         {title}

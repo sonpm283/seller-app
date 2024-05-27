@@ -8,14 +8,14 @@ import { Box, Grid, LinearProgress } from '@mui/material'
 import { PostAdd } from '@mui/icons-material'
 import { useAppDispatch, useAppSelector } from '~/hooks/useTypeSelector'
 import CustomSelectBox from './custom-select-box'
-// import { useState } from 'react'
 import { CreateProduct } from '~/types/product.type'
-import { createProduct } from '~/store/reducers/productSlice'
+import { cancelEditingProduct, createProduct } from '~/store/reducers/productSlice'
 import { toast } from 'react-toastify'
 import FieldErrorAlert from '../Form/FieldErrorAlert'
 import { Controller, useForm } from 'react-hook-form'
 import { FIELD_REQUIRED_MESSAGE } from '~/utils/validators'
 import { FormInputMultiCheckbox } from './FormInputMultiCheckbox'
+import { useEffect } from 'react'
 interface CustomProductDialogFormProps {
   isOpen: boolean
   children?: React.ReactNode
@@ -27,12 +27,7 @@ export default function CustomProductDialogForm(props: CustomProductDialogFormPr
   const { isOpen, setOpen } = props
 
   const dispatch = useAppDispatch()
-  const { stage } = useAppSelector((state) => state.products)
-
-  const handleClose = () => {
-    setOpen(false)
-    reset()
-  }
+  const { stage, productEditing } = useAppSelector((state) => state.products)
 
   const {
     handleSubmit,
@@ -44,14 +39,19 @@ export default function CustomProductDialogForm(props: CustomProductDialogFormPr
     defaultValues: {
       name: '',
       available: 1,
+      // categoryId: 0,
       price: 50000,
       colorIds: [],
-    },
+    }
   })
 
-  const onSubmit = (data: CreateProduct) => {
-    console.log(data)
+  const handleClose = () => {
+    setOpen(false)
+    dispatch(cancelEditingProduct())
+    reset()
+  }
 
+  const onSubmit = (data: CreateProduct) => {
     dispatch(createProduct(data))
     toast('Create product successfully!!', {
       position: 'bottom-left',
@@ -59,6 +59,17 @@ export default function CustomProductDialogForm(props: CustomProductDialogFormPr
     })
     handleClose()
   }
+
+  useEffect(() => {
+    if (productEditing) {
+      setValue('name', productEditing.name)
+      setValue('price', productEditing.price)
+      setValue('categoryId', productEditing.categoryId)
+      setValue('colorIds', productEditing.colorIds as number[])
+    } else {
+      reset()
+    }
+  }, [productEditing, setValue, reset])
 
   return (
     <Dialog open={isOpen} onClose={handleClose} fullWidth>
@@ -70,7 +81,7 @@ export default function CustomProductDialogForm(props: CustomProductDialogFormPr
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogTitle>
           <Grid container alignItems="center" spacing={1}>
-            <Grid item>Creating a Product</Grid>
+            <Grid item> {!productEditing ? 'Creating a Product' : 'Edit Product'} </Grid>
             <Grid item>
               <Box sx={{ pt: 1 }}>
                 <PostAdd color="primary" />
@@ -131,18 +142,27 @@ export default function CustomProductDialogForm(props: CustomProductDialogFormPr
                   title="Category"
                   options={listCategory}
                   onSelect={(value: number) => field.onChange(value)}
+                  initValue={field.value?.toString()}
                 />
               )}
             />
             <FieldErrorAlert errorMessage={errors.categoryId?.message} />
           </Box>
           <Box sx={{ padding: '0 1em 1em 1em' }}>
-            <FormInputMultiCheckbox
+            <Controller
               name="colorIds"
               control={control}
-              setValue={setValue}
-              error={errors.colorIds?.message}
-              label="Colors"
+              rules={{ required: FIELD_REQUIRED_MESSAGE }}
+              render={({ field }) => (
+                <FormInputMultiCheckbox
+                  error={errors.colorIds?.message}
+                  label="Colors"
+                  initValue={field.value}
+                  onSelect={(value?: number[]) => {
+                    field.onChange(value)
+                  }}
+                />
+              )}
             />
           </Box>
           <Box sx={{ padding: '0 1em 1em 1em' }}>

@@ -3,6 +3,7 @@ import { styled } from '@mui/system'
 import CustomCreatePostButton from '~/components/MuiCustom/custom-create-product-button'
 import { useAppSelector } from '~/hooks/useTypeSelector'
 import { formatCurrency } from '~/utils/fomatters'
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd'
 
 const Statistical = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -47,7 +48,7 @@ export default function SellerStats({ statis }: StatisProps) {
         </Statistical>
       </Box>
 
-      <CustomCreatePostButton title='Add' />
+      <CustomCreatePostButton title="Add" color='success' icon={<LibraryAddIcon />} />
     </Box>
   )
 }

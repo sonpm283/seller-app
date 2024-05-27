@@ -8,6 +8,11 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Paper from '@mui/material/Paper'
 import { Box, Button, Pagination } from '@mui/material'
+import { useConfirm } from 'material-ui-confirm'
+import { useAppDispatch } from '~/hooks/useTypeSelector'
+import { deleteProduct, setEditingProduct } from '~/store/reducers/productSlice'
+import { toast } from 'react-toastify'
+import CustomCreatePostButton from '../MuiCustom/custom-create-product-button'
 
 interface ProductData {
   id: string
@@ -24,6 +29,36 @@ interface DataTableProps<T> {
 }
 
 export default function ProductTable({ rows }: DataTableProps<ProductData>) {
+  const confirmDeleteColumn = useConfirm()
+  const dispatch = useAppDispatch()
+  const handleDeleteProduct = (productId: string) => {
+    confirmDeleteColumn({
+      title: 'Delete Product?',
+      description: 'This action will permanently delete your Product! Are you sure?',
+      confirmationText: 'Confirm',
+      cancellationText: 'Cancel',
+      // buttonOrder: ['cancel', 'confirm']
+      // content: 'test content hehe',
+      // allowClose: false,
+      // dialogProps: { maxWidth: 'lg' },
+      // cancellationButtonProps: { color: 'primary' },
+      // confirmationButtonProps: { color: 'success', variant: 'outlined' },
+      // description: 'Phải nhập chữ sondz thì mới được Confirm',
+      // confirmationKeyword: 'sondz'
+    })
+      .then(() => {
+        dispatch(deleteProduct(productId))
+        toast('Delete product successfully!!!', {
+          position: 'bottom-left',
+        })
+      })
+      .catch(() => {})
+  }
+
+  const handleUpdatePost = (id: string) => {
+    dispatch(setEditingProduct(id))
+  }
+
   return (
     <>
       <TableContainer
@@ -60,10 +95,13 @@ export default function ProductTable({ rows }: DataTableProps<ProductData>) {
                 <TableCell align="left">{row.price}</TableCell>
                 <TableCell>
                   <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-                    <Button variant="outlined" startIcon={<EditIcon />}>
-                      Edit
-                    </Button>
-                    <Button variant="outlined" color="error" startIcon={<DeleteIcon />}>
+                    <CustomCreatePostButton onUpdatePost={() => handleUpdatePost(row.id)} title="Edit" icon={<EditIcon />} />
+                    <Button
+                      onClick={() => handleDeleteProduct(row.id)}
+                      variant="outlined"
+                      color="error"
+                      startIcon={<DeleteIcon />}
+                    >
                       Delete
                     </Button>
                   </Box>

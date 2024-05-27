@@ -11,11 +11,11 @@ const productApi = {
     const url = PRODUCT_API.PRODUCTS
     return axiosClient.post<Product>(url, { ...data, sold: 0 })
   },
-  updateProduct(data: Product) {
-    const url = `${PRODUCT_API.PRODUCTS}/${data.id}`
+  updateProduct(productId: string, data: Product) {
+    const url = `${PRODUCT_API.PRODUCTS}/${productId}`
     return axiosClient.put<Product>(url, data)
   },
-  deleteProduct(id: number) {
+  deleteProduct(id: string) {
     const url = `${PRODUCT_API.PRODUCTS}/${id}`
     return axiosClient.delete<Product>(url)
   },

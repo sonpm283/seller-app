@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Box, Checkbox, FormControl, FormControlLabel, FormLabel } from '@mui/material'
-import { Controller } from 'react-hook-form'
 import { useAppSelector } from '~/hooks/useTypeSelector'
 import { capitalizeFirstLetter } from '~/utils/fomatters'
-import { FIELD_REQUIRED_MESSAGE } from '~/utils/validators'
 import FieldErrorAlert from '../Form'
 
 interface FormInputProps {
-  name: string
-  control: any
-  setValue: any
   label: string
   error?: string
+  initValue: number[]
+  onSelect: (value?: number[]) => void
 }
 
 interface Option {
@@ -19,15 +16,14 @@ interface Option {
   value: number
 }
 
-export const FormInputMultiCheckbox = ({ name, control, setValue, label, error }: FormInputProps) => {
-  const [selectedItems, setSelectedItems] = useState<number[]>([])
+export const FormInputMultiCheckbox = ({ label, error, initValue, onSelect }: FormInputProps) => {
+  const [selectedItems, setSelectedItems] = useState<number[]>(initValue)
   const { listColor } = useAppSelector((state) => state.colors)
 
   const options = Object.keys(listColor).map((key) => {
     return { label: listColor[key].name, value: listColor[key].id }
   })
 
-  // handling the selection manually
   const handleSelect = (value: number) => {
     const isPresent = selectedItems.indexOf(value)
     if (isPresent !== -1) {
@@ -37,12 +33,13 @@ export const FormInputMultiCheckbox = ({ name, control, setValue, label, error }
       setSelectedItems((prevItems: number[]) => [...prevItems, value])
     }
   }
-  // setting form value manually
+
   useEffect(() => {
-    setValue(name, selectedItems)
-  }, [name, selectedItems, setValue])
+    onSelect(selectedItems.length ? selectedItems : undefined)
+  }, [selectedItems])
+
   return (
-    <FormControl size={'small'} variant={'outlined'}>
+    <FormControl size={'small'} variant={'outlined'} sx={{ width: '100%' }}>
       <FormLabel component="legend">{label}</FormLabel>
       <Box mt={2} ml={1.4}>
         {options.map((option: Option) => {
@@ -54,18 +51,13 @@ export const FormInputMultiCheckbox = ({ name, control, setValue, label, error }
                 '& .Mui-checked + .MuiTypography-root': { backgroundColor: option.label },
               }}
               control={
-                <Controller
-                  name={name}
-                  rules={{ required: FIELD_REQUIRED_MESSAGE }}
-                  render={({ field }) => {
-                    return (
-                      <Checkbox
-                        checked={selectedItems.includes(option.value)}
-                        onChange={() => handleSelect(option.value)}
-                      />
-                    )
+                <Checkbox
+                  checked={selectedItems.includes(Number(option.value))}
+                  onChange={() => {
+                    console.log(typeof option.value)
+
+                    handleSelect(Number(option.value))
                   }}
-                  control={control}
                 />
               }
               label={capitalizeFirstLetter(option.label)}

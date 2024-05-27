@@ -10,14 +10,15 @@ interface CustomSelectBox {
   title: string
   options: { [key: string]: Category }
   onSelect: (value: number) => void
+  initValue: string
 }
 
 export default function CustomSelectBox(props: CustomSelectBox) {
-  const { title, options, onSelect } = props
-  const [selectValue, setSelectValue] = useState('')
+  const { title, options, onSelect, initValue } = props
+  const [selectValue, setSelectValue] = useState(initValue)
 
   const handleChange = (event: SelectChangeEvent) => {
-    setSelectValue(event.target.value as string)
+    setSelectValue(event.target.value)
     onSelect(Number(event.target.value))
   }
   return (
@@ -27,7 +28,7 @@ export default function CustomSelectBox(props: CustomSelectBox) {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={selectValue}
+          value={selectValue || ''}
           label={title}
           onChange={handleChange}
         >
