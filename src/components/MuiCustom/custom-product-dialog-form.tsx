@@ -194,7 +194,7 @@ export default function CustomProductDialogForm(props: CustomProductDialogFormPr
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Save</Button>
+          <Button type="submit" className='interceptor-loading'>Save</Button>
         </DialogActions>
       </form>
     </Dialog>

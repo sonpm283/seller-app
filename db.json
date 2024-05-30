@@ -49,14 +49,13 @@
   ],
   "products": [
     {
-      "name": "sondzvd",
+      "name": "sondz234",
       "available": 1,
-      "price": "44568",
+      "price": "500000",
       "colorIds": [
-        6,
-        1
+        3
       ],
-      "categoryId": 1,
+      "categoryId": 3,
       "sold": 0,
       "id": "1"
     },
@@ -73,48 +72,59 @@
       "price": 450000
     },
     {
-      "id": "3",
-      "name": "Backpack Elsa",
-      "available": 100,
-      "sold": 7,
-      "categoryId": 2,
+      "name": "Backpack Elsassss",
+      "available": 1,
+      "price": 370000,
       "colorIds": [
         4,
         6
       ],
-      "price": 370000
+      "categoryId": 1,
+      "sold": 0,
+      "id": "3"
     },
     {
-      "id": "8e1a",
-      "name": "343243243",
-      "available": "1324324",
-      "price": "500002343243",
-      "colorIds": [
-        2,
-        4
-      ],
-      "categoryId": 2,
-      "sold": 0
-    },
-    {
-      "id": "2f43",
-      "name": "32432432",
+      "id": "3c14",
+      "name": "234",
       "available": 1,
-      "price": "50000324324",
+      "price": 50000,
       "colorIds": [
-        4
+        3
       ],
       "categoryId": 3,
       "sold": 0
     },
     {
-      "id": "0313",
+      "id": "e840",
       "name": "234",
-      "available": "13324324",
-      "price": "50000324324",
+      "available": 1,
+      "price": 50000,
       "colorIds": [
-        2,
-        5
+        6,
+        3
+      ],
+      "categoryId": 4,
+      "sold": 0
+    },
+    {
+      "id": "05d3",
+      "name": "12",
+      "available": "1324",
+      "price": 50000,
+      "colorIds": [
+        2
+      ],
+      "categoryId": 3,
+      "sold": 0
+    },
+    {
+      "id": "ec2c",
+      "name": "234324",
+      "available": "1324",
+      "price": 50000,
+      "colorIds": [
+        6,
+        4
       ],
       "categoryId": 3,
       "sold": 0

@@ -1,5 +1,4 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { AxiosError } from 'axios'
 import productApi from '~/apis/productsApi'
 import { ACTIONS, REDUCERS } from '~/constants'
 import { CreateProduct, Product } from '~/types/product.type'
@@ -13,61 +12,35 @@ interface ProductState {
 }
 
 // Get the list of products
-export const getProductList = createAsyncThunk(ACTIONS.GET_PRODUCT_LIST, async (_, thunkApi) => {
-  try {
-    const response = await productApi.getProductList()
-    return (response.data as Product[]) || []
-  } catch (error) {
-    let errorMessage = 'Unknown error occurred'
-    if (error instanceof AxiosError) {
-      errorMessage = error.response?.data.message || 'Unknown error occurred'
-    }
-    return thunkApi.rejectWithValue(errorMessage)
-  }
+export const getProductList = createAsyncThunk(ACTIONS.GET_PRODUCT_LIST, async () => {
+  const response = await productApi.getProductList()
+  return (response.data as Product[]) || []
 })
 
 // Create a new product
-export const createProduct = createAsyncThunk(ACTIONS.CREATE_PRODUCT, async (newProduct: CreateProduct, thunkApi) => {
-  try {
-    const response = await productApi.addProduct(newProduct)
-    return (response.data as Product) || {}
-  } catch (error) {
-    let errorMessage = 'Unknown error occurred'
-    if (error instanceof AxiosError) {
-      errorMessage = error.response?.data.message || 'Unknown error occurred'
-    }
-    return thunkApi.rejectWithValue(errorMessage)
-  }
+export const createProduct = createAsyncThunk(ACTIONS.CREATE_PRODUCT, async (newProduct: CreateProduct) => {
+  const response = await productApi.addProduct(newProduct)
+  return (response.data as Product) || {}
 })
 
 // Update product
 export const updateProduct = createAsyncThunk(
-  'products/updateProduct',
-  async ({ id, productUpdate }: { id: string; productUpdate: CreateProduct }, thunkApi) => {
-    try {
-      const response = await productApi.updateProduct(id, productUpdate)
+  ACTIONS.UPDATE_PRODUCT,
+  async ({ id, productUpdate }: { id: string; productUpdate: CreateProduct }) => {
+    const response = await productApi.updateProduct(id, productUpdate)
 
-      return response?.data || []
-    } catch (error: any) {
-      const errorMessage = error.message
-      return thunkApi.rejectWithValue(errorMessage)
-    }
+    return response?.data || []
   },
 )
 
 // Delete product
 export const deleteProduct = createAsyncThunk(ACTIONS.DELETE_PRODUCT, async (productId: string, thunkApi) => {
-  try {
-    if (productId === null) {
-      return thunkApi.rejectWithValue('Failed to delete product!')
-    }
-
-    const response = await productApi.deleteProduct(productId)
-    return (response.data as Product) || {}
-  } catch (error: any) {
-    const errorMessage = error.message
-    return thunkApi.rejectWithValue(errorMessage)
+  if (productId === null) {
+    return thunkApi.rejectWithValue('Failed to delete product!')
   }
+
+  const response = await productApi.deleteProduct(productId)
+  return (response.data as Product) || {}
 })
 
 const pendingListType = [getProductList.pending.type, createProduct.pending.type, deleteProduct.pending.type]

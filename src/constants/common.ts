@@ -20,6 +20,7 @@ export const ACTIONS = {
   GET_PRODUCT_LIST: 'products/getProductList',
   CREATE_PRODUCT: 'products/createProduct',
   DELETE_PRODUCT: 'products/deleteProduct',
+  UPDATE_PRODUCT: 'products/updateProduct',
   GET_CATEGORY_LIST: 'categories/getCategoryList',
   GET_COLOR_LIST: 'colors/getColorList',
 }
