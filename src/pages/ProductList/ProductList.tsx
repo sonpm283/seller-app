@@ -7,6 +7,7 @@ import { getColorList } from '~/store/reducers/colorsSlice'
 import { getProductList } from '~/store/reducers/productSlice'
 import { capitalizeFirstLetter, formatCurrency } from '~/utils/fomatters'
 import SellerStats from './components/SellerStats/SellerStats'
+import PageLoadingSpinner from '~/components/Loading/PageLoadingSpinner'
 
 function ProductList() {
   const { listProductIds, listProduct } = useAppSelector((state) => state.products)
@@ -56,9 +57,15 @@ function ProductList() {
 
   return (
     <Box>
-      <Typography variant="h3">Seller</Typography>
-      <SellerStats statis={statis} />
-      <ProductTable rows={tableDataList} />
+      {!listProduct ? (
+        <PageLoadingSpinner caption="Loading..." />
+      ) : (
+        <>
+          <Typography variant="h3">Seller</Typography>
+          <SellerStats statis={statis} />
+          <ProductTable rows={tableDataList} />
+        </>
+      )}
     </Box>
   )
 }

@@ -16,6 +16,10 @@ export const COLOR_API = {
   COLORS: '/colors',
 }
 
+export const AUTH_API = {
+  LOGIN: '/login'
+}
+
 export const ACTIONS = {
   GET_PRODUCT_LIST: 'products/getProductList',
   CREATE_PRODUCT: 'products/createProduct',
@@ -23,4 +27,5 @@ export const ACTIONS = {
   UPDATE_PRODUCT: 'products/updateProduct',
   GET_CATEGORY_LIST: 'categories/getCategoryList',
   GET_COLOR_LIST: 'colors/getColorList',
+  LOGIN: 'auth/login',
 }
