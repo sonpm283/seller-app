@@ -2,8 +2,6 @@ import { useState } from 'react'
 import Box from '@mui/material/Box'
 import ModeSelect from '~/components/ModeSelect/ModeSelect'
 import AppsIcon from '@mui/icons-material/Apps'
-// import { ReactComponent as Vite } from '~/assets/loading.svg'
-// import SvgIcon from '@mui/material/SvgIcon'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import Badge from '@mui/material/Badge'
@@ -13,6 +11,9 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 import InputAdornment from '@mui/material/InputAdornment'
 import SearchIcon from '@mui/icons-material/Search'
 import CloseIcon from '@mui/icons-material/Close'
+import Profile from './Profile/Profile'
+import { Link } from 'react-router-dom'
+import { Button } from '@mui/material'
 
 function AppBar() {
   const [searchValue, setSearchValue] = useState('')
@@ -34,8 +35,6 @@ function AppBar() {
       <Box
         sx={{
           width: '284px',
-          borderRight: (theme) => `2px solid ${theme.palette.grey[400]}`,
-          height: '100%',
           display: 'flex',
           alignItems: 'center',
           gap: 2,
@@ -43,17 +42,26 @@ function AppBar() {
       >
         <AppsIcon sx={{ color: 'white' }} />
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-          {/* <SvgIcon component={Vite} fontSize="small" inheritViewBox sx={{ color: 'white' }} /> */}
-          <Typography
-            variant="body1"
-            sx={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'white' }}
-          >
-            Sellerapp
+          <Typography variant="body1" sx={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'white' }}>
+            <Link to="/" style={{ textDecoration: 'none' }}>
+              <Button
+                variant="outlined"
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  color: 'white',
+                  borderColor: 'white',
+                  '&:hover': { color: '#fdba26', borderColor: '#fdba26' },
+                }}
+              >
+                SELLER APP
+              </Button>
+            </Link>
           </Typography>
         </Box>
       </Box>
 
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1 }} ml={2}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1 }} ml={10}>
         <TextField
           id="outlined-search"
           label="Find Anything..."
@@ -78,7 +86,7 @@ function AppBar() {
             ),
           }}
           sx={{
-            minWidth: '300px',
+            minWidth: '400px',
             '& label': { color: 'white' },
             '& input': { color: 'white' },
             '& label.Mui-focused': { color: 'white' },
@@ -103,6 +111,8 @@ function AppBar() {
         <Tooltip title="Help">
           <HelpOutlineIcon sx={{ cursor: 'pointer', color: 'white' }} />
         </Tooltip>
+
+        <Profile />
       </Box>
     </Box>
   )

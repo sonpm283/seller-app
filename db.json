@@ -1,10 +1,8 @@
 {
-  "auth":
-    {
-      "email": "admin@gmail.com",
-      "password": "123456"
-    }
-  ,
+  "auth": {
+    "email": "admin@gmail.com",
+    "password": "123456"
+  },
   "categories": [
     {
       "id": "1",
@@ -17,88 +15,119 @@
     {
       "id": "3",
       "name": "Accessory"
+    },
+    {
+      "id": "4",
+      "name": "Accessory 2"
     }
   ],
   "colors": [
     {
-      "id": 1,
+      "id": "1",
       "name": "white"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "yellow"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "black"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "pink"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "blue"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "silver"
     }
   ],
   "products": [
     {
-      "id": 1,
-      "name": "T-shirt long sleeve",
-      "available": 23,
-      "sold": 10,
-      "categoryId": 1,
-      "colorIds": [1, 4],
-      "price": 300000
+      "name": "sondz234",
+      "available": 1,
+      "price": "500000",
+      "colorIds": [
+        3
+      ],
+      "categoryId": 3,
+      "sold": 0,
+      "id": "1"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Trouser with tie",
       "available": 4,
       "sold": 2,
       "categoryId": 1,
-      "colorIds": [1, 4],
+      "colorIds": [
+        1,
+        4
+      ],
       "price": 450000
     },
     {
-      "id": 3,
-      "name": "Backpack Elsa",
-      "available": 100,
-      "sold": 7,
-      "categoryId": 2,
-      "colorIds": [4, 6],
-      "price": 370000
+      "name": "Backpack Elsassss",
+      "available": 1,
+      "price": 370000,
+      "colorIds": [
+        4,
+        6
+      ],
+      "categoryId": 1,
+      "sold": 0,
+      "id": "3"
     },
     {
-      "id": 4,
-      "name": "Silver necklace",
-      "available": 30,
-      "sold": 1,
+      "id": "3c14",
+      "name": "234",
+      "available": 1,
+      "price": 50000,
+      "colorIds": [
+        3
+      ],
       "categoryId": 3,
-      "colorIds": [5],
-      "price": 1450000
+      "sold": 0
     },
     {
-      "id": 5,
-      "name": "Hand Bag with metal strap",
-      "available": 5,
-      "sold": 1,
-      "categoryId": 2,
-      "colorIds": [3, 2],
-      "price": 260000
+      "id": "e840",
+      "name": "234",
+      "available": 1,
+      "price": 50000,
+      "colorIds": [
+        6,
+        3
+      ],
+      "categoryId": 4,
+      "sold": 0
     },
     {
-      "id": 6,
-      "name": "Hand Bag with metal strap1",
-      "available": 19,
-      "sold": 18,
-      "categoryId": 2,
-      "colorIds": [4, 2],
-      "price": 560000
+      "id": "05d3",
+      "name": "12",
+      "available": "1324",
+      "price": 50000,
+      "colorIds": [
+        2
+      ],
+      "categoryId": 3,
+      "sold": 0
+    },
+    {
+      "id": "ec2c",
+      "name": "234324",
+      "available": "1324",
+      "price": 50000,
+      "colorIds": [
+        6,
+        4
+      ],
+      "categoryId": 3,
+      "sold": 0
     }
   ]
 }

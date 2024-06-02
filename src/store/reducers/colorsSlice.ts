@@ -7,7 +7,7 @@ import { Color } from '~/types/color.type'
 interface ColorState {
   stage: 'idle' | 'loading' | 'succeeded' | 'failed'
   listColorsIds: number[]
-  listColor: { [key: number]: Color }
+  listColor: { [key: string]: Color }
   error: string | null
 }
 

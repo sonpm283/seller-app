@@ -79,6 +79,8 @@ const theme = extendTheme({
         root: {
           '&.MuiTypography-body1': { fontSize: '0.875rem' },
         },
+        body1: 'span',
+        body2: 'span',
       },
     },
     MuiOutlinedInput: {
