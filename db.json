@@ -1,7 +1,7 @@
 {
   "auth": {
     "email": "admin@gmail.com",
-    "password": "123456"
+    "password": "12345678a"
   },
   "categories": [
     {
@@ -49,17 +49,6 @@
   ],
   "products": [
     {
-      "name": "sondz234",
-      "available": 1,
-      "price": "500000",
-      "colorIds": [
-        3
-      ],
-      "categoryId": 3,
-      "sold": 0,
-      "id": "1"
-    },
-    {
       "id": "2",
       "name": "Trouser with tie",
       "available": 4,
@@ -82,52 +71,6 @@
       "categoryId": 1,
       "sold": 0,
       "id": "3"
-    },
-    {
-      "id": "3c14",
-      "name": "234",
-      "available": 1,
-      "price": 50000,
-      "colorIds": [
-        3
-      ],
-      "categoryId": 3,
-      "sold": 0
-    },
-    {
-      "id": "e840",
-      "name": "234",
-      "available": 1,
-      "price": 50000,
-      "colorIds": [
-        6,
-        3
-      ],
-      "categoryId": 4,
-      "sold": 0
-    },
-    {
-      "id": "05d3",
-      "name": "12",
-      "available": "1324",
-      "price": 50000,
-      "colorIds": [
-        2
-      ],
-      "categoryId": 3,
-      "sold": 0
-    },
-    {
-      "id": "ec2c",
-      "name": "234324",
-      "available": "1324",
-      "price": 50000,
-      "colorIds": [
-        6,
-        4
-      ],
-      "categoryId": 3,
-      "sold": 0
     }
   ]
 }

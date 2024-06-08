@@ -1,11 +1,26 @@
 import MainLayout from './components/Layout/MainLayout'
 import ProductList from './pages/ProductList'
 import Categories from './pages/Categories'
-import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import NotFound from './pages/404'
 import Auth from './pages/Auth/Auth'
+import { useAppSelector } from './hooks/useTypeSelector'
+
+const ProtectedRoute = () => {
+  const { user } = useAppSelector((state) => state.auth)
+  if (!user) return <Navigate to="/login" replace={true} />
+
+  return <Outlet />
+}
+
+const UnauthoziedRoute = () => {
+  const { user } = useAppSelector((state) => state.auth)
+  if (user) return <Navigate to="/" replace={true} />
+
+  return <Outlet />
+}
 
 const router = createBrowserRouter([
   {
@@ -13,11 +28,18 @@ const router = createBrowserRouter([
     element: <Navigate to="/seller/products" replace={true} />,
   },
   {
-    path: '/login',
-    element: <Auth />,
+    path: '',
+    element: <UnauthoziedRoute />, 
+    children: [
+      {
+        path: 'login',
+        element: <Auth />,
+      },
+    ],
   },
   {
     path: 'seller',
+    element: <ProtectedRoute />,
     children: [
       {
         path: 'products',

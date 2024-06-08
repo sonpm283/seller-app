@@ -7,9 +7,11 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import Avatar from '@mui/material/Avatar'
 import Tooltip from '@mui/material/Tooltip'
 import IconButton from '@mui/material/IconButton'
-import PersonAdd from '@mui/icons-material/PersonAdd'
-import Settings from '@mui/icons-material/Settings'
 import Logout from '@mui/icons-material/Logout'
+import { useAppDispatch, useAppSelector } from '~/hooks/useTypeSelector'
+import { logout } from '~/store/reducers/authSlice'
+import { useConfirm } from 'material-ui-confirm'
+import { toast } from 'react-toastify'
 
 function Profile() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -19,6 +21,26 @@ function Profile() {
   }
   const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  const dispatch = useAppDispatch()
+  const { user } = useAppSelector((state) => state.auth)
+  const confirmLogout = useConfirm()
+
+  const handleLogout = () => {
+    confirmLogout({
+      title: 'Logout?',
+      description: 'Are you sure?',
+      confirmationText: 'Confirm',
+      cancellationText: 'Cancel',
+    })
+      .then(() => {
+        dispatch(logout())
+        toast('Logout successfully!!!', {
+          position: 'bottom-left',
+        })
+      })
+      .catch(() => {})
   }
 
   return (
@@ -32,7 +54,11 @@ function Profile() {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          <Avatar sx={{ width: 36, height: 36 }} alt="S" src="https://mcdn.coolmate.me/image/February2023/tho-bay-mau-la-ai-nhung-dieu-thu-vi-ve-tho-bay-mau-cute-gay-sot-hien-nay-1194_887.jpg" />
+          <Avatar
+            sx={{ width: 36, height: 36 }}
+            alt="S"
+            src="https://mcdn.coolmate.me/image/February2023/tho-bay-mau-la-ai-nhung-dieu-thu-vi-ve-tho-bay-mau-cute-gay-sot-hien-nay-1194_887.jpg"
+          />
         </IconButton>
       </Tooltip>
       <Menu
@@ -45,25 +71,10 @@ function Profile() {
         }}
       >
         <MenuItem>
-          <Avatar sx={{ width: 28, height: 28, mr: 2 }} /> Profile
-        </MenuItem>
-        <MenuItem>
-          <Avatar sx={{ width: 28, height: 28, mr: 2 }} /> My account
+          <Avatar sx={{ width: 28, height: 28, mr: 2 }} />Hi! {user.split('@')[0]}
         </MenuItem>
         <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

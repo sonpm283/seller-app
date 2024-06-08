@@ -17,7 +17,7 @@ export const COLOR_API = {
 }
 
 export const AUTH_API = {
-  LOGIN: '/login'
+  LOGIN: '/auth'
 }
 
 export const ACTIONS = {

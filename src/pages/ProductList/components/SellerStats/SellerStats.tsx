@@ -27,6 +27,9 @@ interface StatisProps {
 export default function SellerStats({ statis }: StatisProps) {
   const { listProductIds } = useAppSelector((state) => state.products)
 
+  console.log(statis);
+  
+
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 5 }} mb={3}>
       <Box style={{ display: 'flex', alignItems: 'center', gap: 30, listStyle: 'none' }}>

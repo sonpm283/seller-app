@@ -3,9 +3,9 @@ import { Auth } from '~/types/auth.type'
 import axiosClient from '~/utils/httpClient'
 
 const authApi = {
-  login(data: Auth) {
+  login() {
     const url = AUTH_API.LOGIN
-    return axiosClient.post<Auth>(url, data)
+    return axiosClient.get<Auth>(url)
   },
 }
 
