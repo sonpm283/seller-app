@@ -47,8 +47,8 @@
       "name": "silver"
     },
     {
-      "id": "b94a",
-      "name": "re"
+      "id": "81a3",
+      "name": "red"
     }
   ],
   "products": [
@@ -85,6 +85,36 @@
         2
       ],
       "categoryId": 2,
+      "sold": 0
+    },
+    {
+      "id": "9460",
+      "name": "2343",
+      "available": 1,
+      "price": "50000324",
+      "colorIds": [
+        2,
+        6
+      ],
+      "categoryId": 3,
+      "sold": 0
+    },
+    {
+      "id": "1002",
+      "name": "3243",
+      "available": "1324",
+      "price": 50000,
+      "colorIds": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "categoryId": 3,
       "sold": 0
     }
   ]

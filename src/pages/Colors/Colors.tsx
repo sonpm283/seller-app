@@ -8,7 +8,6 @@ import { CreateColor } from '~/types/color.type'
 
 export default function Colors() {
   const { listColorsIds, listColor } = useAppSelector((state) => state.colors)
-  const [colorValue, setColorValue] = useState<string>('')
   const [formSate, setFormState] = useState<CreateColor>({ name: '' })
 
   const dispatch = useAppDispatch()
@@ -23,8 +22,7 @@ export default function Colors() {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setColorValue(e.target.value)
-    setFormState({ name: colorValue })
+    setFormState({ name: e.target.value })
   }
 
   return (
@@ -49,7 +47,7 @@ export default function Colors() {
               label="New Color"
               type="text"
               size="small"
-              value={colorValue}
+              value={formSate.name}
               onChange={handleChange}
               sx={{
                 minWidth: '200px',
