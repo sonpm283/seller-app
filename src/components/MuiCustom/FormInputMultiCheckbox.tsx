@@ -54,8 +54,6 @@ export const FormInputMultiCheckbox = ({ label, error, initValue, onSelect }: Fo
                 <Checkbox
                   checked={selectedItems.includes(Number(option.value))}
                   onChange={() => {
-                    console.log(typeof option.value)
-
                     handleSelect(Number(option.value))
                   }}
                 />

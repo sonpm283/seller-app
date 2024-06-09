@@ -15,7 +15,6 @@ const authSlice = createSlice({
   reducers: {
     updateCurrentUser: (state, action) => {
       state.stage = 'succedded'
-      console.log(action.payload)
 
       if (action.payload) {
         state.user = action.payload.email
