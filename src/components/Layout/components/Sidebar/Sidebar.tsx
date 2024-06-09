@@ -47,7 +47,7 @@ export default function Sidebar() {
         </StyledLink>
       </MenuItem>
       <MenuItem>
-        <StyledLink to="/seller/colors">
+        <StyledLink to="/seller/color">
           <SvgIcon component={ColorsIcon} fontSize="medium" inheritViewBox />
           <Typography variant="body1" pt={0.25}>
             Colors

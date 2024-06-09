@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import NotFound from './pages/404'
 import Auth from './pages/Auth/Auth'
 import { useAppSelector } from './hooks/useTypeSelector'
+import Colors from './pages/Colors/Colors'
 
 const ProtectedRoute = () => {
   const { user } = useAppSelector((state) => state.auth)
@@ -54,6 +55,14 @@ const router = createBrowserRouter([
         element: (
           <MainLayout>
             <Categories />
+          </MainLayout>
+        ),
+      },
+      {
+        path: 'color',
+        element: (
+          <MainLayout>
+            <Colors />
           </MainLayout>
         ),
       },

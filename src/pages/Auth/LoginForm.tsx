@@ -9,7 +9,7 @@ import Zoom from '@mui/material/Zoom'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { useAppDispatch } from '~/hooks/useTypeSelector'
-import { login } from '~/store/reducers/authSlice'
+import { updateCurrentUser } from '~/store/reducers/authSlice'
 import { useNavigate } from 'react-router-dom'
 import {
   EMAIL_RULE,
@@ -55,7 +55,7 @@ function LoginForm() {
           throw new Error('Invalid email or password')
         }
         
-        dispatch(login(data))
+        dispatch(updateCurrentUser(data))
         navigate('/seller/products')
       })
       .catch((error) => {

@@ -45,6 +45,10 @@
     {
       "id": "6",
       "name": "silver"
+    },
+    {
+      "id": "b94a",
+      "name": "re"
     }
   ],
   "products": [
@@ -71,6 +75,17 @@
       "categoryId": 1,
       "sold": 0,
       "id": "3"
+    },
+    {
+      "id": "afb5",
+      "name": "234",
+      "available": "1324",
+      "price": 50000,
+      "colorIds": [
+        2
+      ],
+      "categoryId": 2,
+      "sold": 0
     }
   ]
 }

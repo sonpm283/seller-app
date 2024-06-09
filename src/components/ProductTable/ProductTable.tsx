@@ -37,14 +37,6 @@ export default function ProductTable({ rows }: DataTableProps<ProductData>) {
       description: 'This action will permanently delete your Product! Are you sure?',
       confirmationText: 'Confirm',
       cancellationText: 'Cancel',
-      // buttonOrder: ['cancel', 'confirm']
-      // content: 'test content hehe',
-      // allowClose: false,
-      // dialogProps: { maxWidth: 'lg' },
-      // cancellationButtonProps: { color: 'primary' },
-      // confirmationButtonProps: { color: 'success', variant: 'outlined' },
-      // description: 'Phải nhập chữ sondz thì mới được Confirm',
-      // confirmationKeyword: 'sondz'
     })
       .then(() => {
         dispatch(deleteProduct(productId))

@@ -1,5 +1,4 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { AxiosError } from 'axios'
 import categoryApi from '~/apis/categoryApi'
 import { ACTIONS, REDUCERS } from '~/constants'
 import { Category } from '~/types/category.type'
@@ -11,18 +10,9 @@ interface CategoryState {
   error: string | null
 }
 
-export const getCategoryList = createAsyncThunk(ACTIONS.GET_CATEGORY_LIST, async (_, thunkApi) => {
-  try {
-    const response = await categoryApi.getCategoryList()
-    return (response.data as Category[]) || []
-  } catch (error) {
-    let errorMessage = 'unknown error'
-    if (error instanceof AxiosError) {
-      errorMessage = error.response?.data.message || 'unknown error'
-    }
-
-    return thunkApi.rejectWithValue(errorMessage)
-  }
+export const getCategoryList = createAsyncThunk(ACTIONS.GET_CATEGORY_LIST, async () => {
+  const response = await categoryApi.getCategoryList()
+  return (response.data as Category[]) || []
 })
 
 const initialState: CategoryState = {

@@ -27,5 +27,7 @@ export const ACTIONS = {
   UPDATE_PRODUCT: 'products/updateProduct',
   GET_CATEGORY_LIST: 'categories/getCategoryList',
   GET_COLOR_LIST: 'colors/getColorList',
+  CREATE_COLOR: 'colors/createColor',
+  DELETE_COLOR: 'colors/deleteColor',
   LOGIN: 'auth/login',
 }
