@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '~/hooks/useTypeSelector'
 import { getCategoryList } from '~/store/reducers/categorySlice'
 import { getColorList } from '~/store/reducers/colorsSlice'
 import { getProductList } from '~/store/reducers/productSlice'
-import { capitalizeFirstLetter, formatCurrency } from '~/utils/fomatters'
+import { capitalizeFirstLetter, formatCurrency } from '~/utils/formatters'
 import SellerStats from './components/SellerStats/SellerStats'
 import PageLoadingSpinner from '~/components/Loading/PageLoadingSpinner'
 
@@ -43,7 +43,7 @@ function ProductList() {
   })
 
   // Calculate total available, sold, revenue
-  const statis = useMemo(() => {
+  const statistic = useMemo(() => {
     return listProductIds.reduce(
       (acc, id) => {
         acc.totalAvailable += Number(listProduct[id].available)
@@ -62,7 +62,7 @@ function ProductList() {
       ) : (
         <>
           <Typography variant="h3">Seller</Typography>
-          <SellerStats statis={statis} />
+          <SellerStats statistic={statistic} />
           <ProductTable rows={tableDataList} />
         </>
       )}

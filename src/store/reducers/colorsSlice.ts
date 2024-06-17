@@ -5,7 +5,7 @@ import { Color, CreateColor } from '~/types/color.type'
 
 interface ColorState {
   stage: 'idle' | 'loading' | 'succeeded' | 'failed'
-  listColorsIds: number[]
+  listColorsIds: string[]
   listColor: { [key: string]: Color }
   error: string | null
 }
@@ -21,13 +21,13 @@ export const createColor = createAsyncThunk(ACTIONS.CREATE_COLOR, async (newColo
   return (response.data as Color) || []
 })
 
-export const deleteColor = createAsyncThunk(ACTIONS.DELETE_COLOR, async (colorId: number) => {
+export const deleteColor = createAsyncThunk(ACTIONS.DELETE_COLOR, async (colorId: string) => {
   const response = await colorApi.deleteColor(colorId)
   return (response.data as Color) || {}
 })
 
 // Define the initial state for the slice
-const inititalState: ColorState = {
+const initialState: ColorState = {
   stage: 'idle',
   listColorsIds: [],
   listColor: {},
@@ -39,7 +39,7 @@ const rejectedListType = [getColorList.rejected.type, deleteColor.rejected.type]
 
 const colorSlice = createSlice({
   name: REDUCERS.COLORS,
-  initialState: inititalState,
+  initialState: initialState,
   // Define reducers for the synchronous action
   reducers: {},
 
@@ -51,8 +51,8 @@ const colorSlice = createSlice({
 
         if (action.payload) {
           const convertData = action.payload.reduce(
-            (acc: { listColorsIds: number[]; listColor: Record<string, Color> }, color: Color) => {
-              acc.listColorsIds.push(color.id)
+            (acc: { listColorsIds: string[]; listColor: Record<string, Color> }, color: Color) => {
+              acc.listColorsIds.push(color.id.toString())
               acc.listColor[color.id] = color
               return acc
             },
@@ -65,7 +65,7 @@ const colorSlice = createSlice({
       })
       .addCase(deleteColor.fulfilled, (state, action: PayloadAction<Color>) => {
         state.stage = 'succeeded'
-        state.listColorsIds = state.listColorsIds.filter((id) => id !== action.payload.id)
+        state.listColorsIds = state.listColorsIds.filter((id) => id !== action.payload.id.toString())
 
         state.listColor = state.listColorsIds.reduce((acc: Record<string, Color>, id) => {
           if (state.listColor[id]) {
@@ -78,7 +78,7 @@ const colorSlice = createSlice({
       .addCase(createColor.fulfilled, (state, action: PayloadAction<Color>) => {
         state.stage = 'succeeded'
         if (action.payload) {
-          state.listColorsIds.push(action.payload.id)
+          state.listColorsIds.push(action.payload.id.toString())
           state.listColor = { ...state.listColor, [action.payload.id]: action.payload }
         }
       })

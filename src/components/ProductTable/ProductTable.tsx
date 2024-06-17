@@ -28,6 +28,8 @@ interface DataTableProps<T> {
   rows: Array<T>
 }
 
+const tableTileList = ['No', 'Name', 'Avaliable', 'Sold', 'Category', 'Colors', 'Price', 'Action']
+
 export default function ProductTable({ rows }: DataTableProps<ProductData>) {
   const confirmDeleteColumn = useConfirm()
   const dispatch = useAppDispatch()
@@ -63,14 +65,12 @@ export default function ProductTable({ rows }: DataTableProps<ProductData>) {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>No</TableCell>
-              <TableCell align="left">Name</TableCell>
-              <TableCell align="left">Avaliable</TableCell>
-              <TableCell align="left">Sold</TableCell>
-              <TableCell align="left">Category</TableCell>
-              <TableCell align="left">Colors</TableCell>
-              <TableCell align="left">Price</TableCell>
-              <TableCell align="center">Action</TableCell>
+              {tableTileList &&
+                tableTileList.map((title) => (
+                  <TableCell key={title} align={title == 'Action' ? 'center' : 'left'}>
+                    {title}
+                  </TableCell>
+                ))}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -87,7 +87,11 @@ export default function ProductTable({ rows }: DataTableProps<ProductData>) {
                 <TableCell align="left">{row.price}</TableCell>
                 <TableCell>
                   <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-                    <CustomCreatePostButton onUpdatePost={() => handleUpdatePost(row.id)} title="Edit" icon={<EditIcon />} />
+                    <CustomCreatePostButton
+                      onUpdatePost={() => handleUpdatePost(row.id)}
+                      title="Edit"
+                      icon={<EditIcon />}
+                    />
                     <Button
                       onClick={() => handleDeleteProduct(row.id)}
                       variant="outlined"

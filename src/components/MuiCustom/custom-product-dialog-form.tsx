@@ -70,7 +70,7 @@ export default function CustomProductDialogForm(props: CustomProductDialogFormPr
       setValue('name', productEditing.name)
       setValue('price', productEditing.price)
       setValue('categoryId', productEditing.categoryId)
-      setValue('colorIds', productEditing.colorIds as number[])
+      setValue('colorIds', productEditing.colorIds as string[])
     } else {
       reset()
     }
@@ -163,7 +163,7 @@ export default function CustomProductDialogForm(props: CustomProductDialogFormPr
                   error={errors.colorIds?.message}
                   label="Colors"
                   initValue={field.value}
-                  onSelect={(value?: number[]) => {
+                  onSelect={(value?: string[]) => {
                     field.onChange(value)
                   }}
                 />

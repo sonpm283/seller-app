@@ -15,10 +15,6 @@
     {
       "id": "3",
       "name": "Accessory"
-    },
-    {
-      "id": "4",
-      "name": "Accessory 2"
     }
   ],
   "colors": [
@@ -43,11 +39,7 @@
       "name": "blue"
     },
     {
-      "id": "6",
-      "name": "silver"
-    },
-    {
-      "id": "81a3",
+      "id": "cc59",
       "name": "red"
     }
   ],
@@ -77,44 +69,39 @@
       "id": "3"
     },
     {
-      "id": "afb5",
-      "name": "234",
-      "available": "1324",
-      "price": 50000,
+      "id": "13cc",
+      "name": "4sdfs",
+      "available": 1,
+      "price": "500003",
       "colorIds": [
-        2
+        "3",
+        "cc59"
       ],
       "categoryId": 2,
       "sold": 0
     },
     {
-      "id": "9460",
-      "name": "2343",
+      "id": "3850",
+      "name": "234",
       "available": 1,
-      "price": "50000324",
+      "price": "5000",
       "colorIds": [
-        2,
-        6
+        "5",
+        "cc59"
       ],
-      "categoryId": 3,
+      "categoryId": 2,
       "sold": 0
     },
     {
-      "id": "1002",
-      "name": "3243",
-      "available": "1324",
-      "price": 50000,
+      "id": "9c08",
+      "name": "234",
+      "available": "1234",
+      "price": "5000032",
       "colorIds": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        "4",
+        "cc59"
       ],
-      "categoryId": 3,
+      "categoryId": 2,
       "sold": 0
     }
   ]

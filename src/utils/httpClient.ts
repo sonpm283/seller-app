@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { interceptorLoadingElements } from './fomatters';
+import { interceptorLoadingElements } from './formatters';
 import { toast } from 'react-toastify';
 
 const axiosClient = axios.create({

@@ -4,7 +4,7 @@ export interface Product {
   available: number
   sold: number
   categoryId: number
-  colorIds?: number[]
+  colorIds?: string[]
   price: number
 }
 
@@ -12,6 +12,6 @@ export interface CreateProduct {
   name: string
   available: number
   categoryId: number
-  colorIds: number[]
+  colorIds: string[]
   price: number
 }

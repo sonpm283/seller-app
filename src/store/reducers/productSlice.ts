@@ -47,7 +47,7 @@ const pendingListType = [getProductList.pending.type, createProduct.pending.type
 const rejectedListType = [getProductList.rejected.type, createProduct.rejected.type, deleteProduct.rejected.type]
 
 // Initial State
-const inititalState: ProductState = {
+const initialState: ProductState = {
   stage: 'idle',
   listProductIds: [],
   listProduct: {},
@@ -57,7 +57,7 @@ const inititalState: ProductState = {
 
 const productSlice = createSlice({
   name: REDUCERS.PRODUCTS,
-  initialState: inititalState,
+  initialState: initialState,
   reducers: {
     setEditingProduct: (state, action: PayloadAction<string>) => {
       const productId = action.payload

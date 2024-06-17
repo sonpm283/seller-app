@@ -18,11 +18,18 @@ export default function Colors() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if(formSate.name === '') return
+    
     dispatch(createColor(formSate))
+    setFormState({ name: '' })
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormState({ name: e.target.value })
+  }
+
+  const handleDeleteColor = (id: string) => {
+    dispatch(deleteColor(id))
   }
 
   return (
@@ -36,7 +43,7 @@ export default function Colors() {
             <Chip
               key={listColor[id].id}
               label={listColor[id].name}
-              onDelete={() => dispatch(deleteColor(listColor[id].id))}
+              onDelete={() => handleDeleteColor(listColor[id].id.toString())}
             />
           ))}
         </Stack>
@@ -51,14 +58,6 @@ export default function Colors() {
               onChange={handleChange}
               sx={{
                 minWidth: '200px',
-                '& label': { color: 'white' },
-                '& input': { color: 'white' },
-                '& label.Mui-focused': { color: 'white' },
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': { borderColor: 'white' },
-                  '&:hover fieldset': { borderColor: 'white' },
-                  '&.Mui-focused fieldset': { borderColor: 'white' },
-                },
               }}
             />
           </Box>

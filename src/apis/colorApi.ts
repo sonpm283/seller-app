@@ -11,7 +11,7 @@ const colorApi = {
     const url = COLOR_API.COLORS
     return axiosClient.post(url, color)
   },
-  deleteColor(id: number) {
+  deleteColor(id: string) {
     const url = `${COLOR_API.COLORS}/${id}`
     return axiosClient.delete(url)
   },

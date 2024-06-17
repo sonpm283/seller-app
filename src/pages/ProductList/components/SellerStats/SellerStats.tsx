@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material'
 import { styled } from '@mui/system'
 import CustomCreatePostButton from '~/components/MuiCustom/custom-create-product-button'
 import { useAppSelector } from '~/hooks/useTypeSelector'
-import { formatCurrency } from '~/utils/fomatters'
+import { formatCurrency } from '~/utils/formatters'
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd'
 
 const Statistical = styled(Box)(({ theme }) => ({
@@ -20,11 +20,11 @@ interface Statis {
   revenue: number
 }
 
-interface StatisProps {
-  statis: Statis
+interface StatisticProps {
+  statistic: Statis
 }
 
-export default function SellerStats({ statis }: StatisProps) {
+export default function SellerStats({ statistic }: StatisticProps) {
   const { listProductIds } = useAppSelector((state) => state.products)
 
   return (
@@ -36,15 +36,15 @@ export default function SellerStats({ statis }: StatisProps) {
         </Statistical>
         <Statistical>
           <Typography variant="h6">Avaiable</Typography>
-          {statis.totalAvailable}
+          {statistic.totalAvailable}
         </Statistical>
         <Statistical>
           <Typography variant="h6">Sold</Typography>
-          {statis.sold}
+          {statistic.sold}
         </Statistical>
         <Statistical>
           <Typography variant="h6">Revenue</Typography>
-          {formatCurrency(statis.revenue)}
+          {formatCurrency(statistic.revenue)}
         </Statistical>
       </Box>
 
